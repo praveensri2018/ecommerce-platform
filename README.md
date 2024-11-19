@@ -39,6 +39,6 @@
    node server.js
 
 ## Environment Variables:
-JWT_SECRET: Secret key for JWT authentication.
-MONGO_URI: MongoDB connection URI.
-RAZORPAY_KEY: Razorpay key for payments.
+- JWT_SECRET: Secret key for JWT authentication.
+- MONGO_URI: MongoDB connection URI.
+- RAZORPAY_KEY: Razorpay key for payments.
