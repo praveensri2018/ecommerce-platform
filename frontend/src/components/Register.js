@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -12,11 +13,10 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password }
+        "http://localhost:5000/api/auth/register",
+        { name, email, password }
       );
-      localStorage.setItem("token", response.data.token); // Save token in local storage
-      navigate("/dashboard"); // Redirect to dashboard after login
+      navigate("/login"); // Redirect to login page after registration
     } catch (err) {
       setError(err.response.data.message || "Something went wrong!");
     }
@@ -24,8 +24,15 @@ function Login() {
 
   return (
     <div>
-      <h2>Login</h2>
+      <h2>Register</h2>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Full Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         <input
           type="email"
           placeholder="Email"
@@ -41,10 +48,10 @@ function Login() {
           required
         />
         {error && <p>{error}</p>}
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
 }
 
-export default Login;
+export default Register;
